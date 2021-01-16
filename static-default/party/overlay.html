@@ -98,14 +98,14 @@ body:not(.chatEnabled) #chatForm {
 
 </style>
 
-<div id=videoMutedEl style="display: none">Camera off</div>
-<div id=audioMutedEl style="display: none">Microphone off</div>
-<div id=chat>
+<div id="videoMutedEl" style="display: none">Camera off</div>
+<div id="audioMutedEl" style="display: none">Microphone off</div>
+<div id="chat">
   <ul data-click-through></ul>
-  <form id=chatForm><input name=message autocomplete=off></form>
-  <div id=touchmove style="display: none">Drag here to move.<br>Drag anywhere else to look around.</div>
+  <form id="chatForm"><input name="message" autocomplete=off></form>
+  <div id="touchmove" style="display: none">Drag here to move.<br>Drag anywhere else to look around.</div>
 </div>
-<script type=module>
+<script type="module">
 
 import Service from '/space/js/Service.js'
 import PlayerControls from '/space/js/PlayerControls.js'

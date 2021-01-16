@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<link rel=stylesheet href=style.css>
+<link rel="stylesheet" href=style.css>
 <body>
 <button type=button onclick="adminAction('reload', '/party/')">Reload renderer</button>
 <button type=button onclick="adminAction('reload', '/space/services/room.html')">Reload room</button>
@@ -11,14 +11,14 @@
 <ul id=knobsEl></ul>
 <template id=knobTemplate>
   <li>
-    <button data-key=map type=button>Map</button>
-    <input data-key=input type=range min=0 max=1 step="0.001"></input>
+    <button data-key=map type="button">Map</button>
+    <input data-key=input type="range" min=0 max=1 step="0.001"></input>
     <span data-key=value></span>
     <span data-key=label></span>
   </li>
 </template>
-<ul id=guests></ul>
-<script type=module>
+<ul id="guests"></ul>
+<script type="module">
 
 class Knobs {
   constructor(config) {

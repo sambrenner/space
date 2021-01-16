@@ -61,7 +61,7 @@ body {
 }
 
 </style>
-<ul id=errlog style="display: none;"></ul>
+<ul id="errlog" style="display: none;"></ul>
 <script>
 
 window.onerror = (e, f, l, c) => {
@@ -79,7 +79,7 @@ window.hqs = location.hash
   .reduce((params, [k, v]) => (params[k] = v, params), {});
 
 </script>
-<script type=module>
+<script type="module">
 
 import RTCPeer from '/space/js/RTCPeer.js'
 
