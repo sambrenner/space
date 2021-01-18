@@ -53,17 +53,18 @@ const buildGlRoom = async (canvas, playerCanvas, config) => {
     powerPreference: 'high-performance',
   });
 
+  renderer.gammaOutput = true;
   renderer.setClearColor(new THREE.Color(0x0f5bff), 1);
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   //renderer.physicallyCorrectLights = true;
 
   const hemiLight = new THREE.HemisphereLight();
+  hemiLight.intensity = 0.2;
   scene.add(hemiLight);
 
   const light = new THREE.SpotLight( 0xffffff, 1, 0, Math.PI / 5, 0.3 );
-  light.position.set( 0, 1500, 1000 );
-  light.target.position.set( 0, 0, 0 );
+  light.position.set( -1000, 1500, 1000 );
 
   light.castShadow = true;
   light.shadow.camera.near = 1200;

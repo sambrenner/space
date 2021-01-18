@@ -7,6 +7,8 @@ export default async function buildBarn(scene) {
   gltfLoader.load('/assets/barn/scene.gltf', (gltf) => {
     const mesh = gltf.scene.children[0];
     mesh.position.setY(30);
+    mesh.position.setZ(-50);
+    mesh.rotateZ(-Math.PI / 2);
     mesh.scale.set(30,30,30);
 
     mesh.traverse(n => { if ( n.isMesh ) {
@@ -37,32 +39,39 @@ function buildFloor(scene) {
   const mat = new THREE.MeshStandardMaterial({map: tex, side: THREE.DoubleSide });
   const plane = new THREE.Mesh(geom, mat);
   plane.rotation.x = Math.PI / 2;
+  plane.rotation.z = -Math.PI / 2;
   plane.position.y = 0.05;
+  plane.position.z = -50;
+  
   plane.receiveShadow = true;
   scene.add(plane);
 }
 
 function buildLights(scene) {
-  const light = new THREE.SpotLight( 0xffffff, 1, 0, .7, 0.3);
-  light.position.setY(50);
-  light.castShadow = true;
-  light.shadow.camera.near = 10;
-  light.shadow.camera.far = 100;
-  light.shadow.bias = 0.0001;
-  scene.add(light);
 }
 
 function buildTables(scene) {
   gltfLoader.load('/assets/longtable/scene.gltf', (gltf) => {
     const mesh = gltf.scene.children[0];
     mesh.scale.set(0.04, 0.04, 0.04);
-    mesh.rotateZ(Math.PI / 2)
+    mesh.position.setZ(-50);
+
     mesh.traverse(n => { if ( n.isMesh ) {
       n.castShadow = true; 
       if(n.material.map) n.material.map.anisotropy = 16; 
     }});
     
     scene.add(mesh);
+
+    const light = new THREE.SpotLight( 0xffffff, 1, 0, .4, 0.3);
+    light.position.setY(50);
+    light.position.setZ(-50);
+    light.target = mesh;
+    light.castShadow = true;
+    light.shadow.camera.near = 10;
+    light.shadow.camera.far = 100;
+    light.shadow.bias = 0.0001;
+    scene.add(light);
   });
 }
 
@@ -70,18 +79,24 @@ async function buildFlags(scene) {
   const gltf = await gltfLoader.loadAsync('/assets/gyroflagpole.glb');
   
   gltf.scene.scale.set(20, 20, 20)
-  gltf.scene.rotateY(Math.PI / 2)
-  gltf.scene.position.x = 120;
+  //gltf.scene.rotateY(Math.PI / 2)
+  gltf.scene.position.x = -40;
   gltf.scene.position.y = 50;
-  gltf.scene.position.z = 40;
-  
+  gltf.scene.position.z = 60;
 
-  const mixer = new THREE.AnimationMixer( gltf.scene );
+  const clone = gltf.scene.clone();
+  clone.position.x = 50;
+
+  const grp = new THREE.AnimationObjectGroup(gltf.scene, clone);
+
+  const mixer = new THREE.AnimationMixer(grp);
   gltf.animations.forEach( ( clip ) => {
     mixer.clipAction( clip ).play();
   } );
 
+
   scene.add(gltf.scene);
+  scene.add(clone);
 
   return mixer;
 }
@@ -91,6 +106,9 @@ function buildRug(scene) {
     const mesh = gltf.scene.children[0];
     mesh.scale.set(0.08, 0.08, 0.04);
     mesh.position.y = 0.1;
+    mesh.position.setZ(-50);
+    mesh.rotateZ(-Math.PI / 2);
+
     //mesh.rotateZ(Math.PI / 2);
     mesh.traverse(n => { if ( n.isMesh ) {
       n.receiveShadow = true; 
@@ -100,5 +118,10 @@ function buildRug(scene) {
     scene.add(mesh);
   });
 }
+
+
+
+
+
 
 
