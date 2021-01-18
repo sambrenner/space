@@ -20,7 +20,6 @@ export default async function buildBarn(scene) {
     scene.add(mesh);
   });
 
-  buildLights(scene);
   buildTables(scene);
   buildFloor(scene);
   buildRug(scene);
@@ -45,9 +44,6 @@ function buildFloor(scene) {
   
   plane.receiveShadow = true;
   scene.add(plane);
-}
-
-function buildLights(scene) {
 }
 
 function buildTables(scene) {
@@ -118,10 +114,4 @@ function buildRug(scene) {
     scene.add(mesh);
   });
 }
-
-
-
-
-
-
 
