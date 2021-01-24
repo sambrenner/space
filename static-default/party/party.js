@@ -63,7 +63,7 @@ const buildGlRoom = async (canvas, playerCanvas, config) => {
   hemiLight.intensity = 0.2;
   scene.add(hemiLight);
 
-  const light = new THREE.SpotLight( 0xffffff, 1, 0, Math.PI / 5, 0.3 );
+  const light = new THREE.SpotLight( 0xffffff, 1, 0, Math.PI / 4, .3 );
   light.position.set( -1000, 1500, 1000 );
 
   light.castShadow = true;
