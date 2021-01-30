@@ -6,6 +6,7 @@ import RTCLoopback from '../space/js/RTCLoopback.js';
 import { createStatsTracker } from '../space/js/createStatsTracker.js';
 //import { createProjector } from './utils.js';
 import buildBarn from './barn.js';
+import buildOther from './otherAssets.js';
 
 Service.get('docent', (docent) => {});
 
@@ -122,6 +123,7 @@ const buildGlRoom = async (canvas, playerCanvas, config) => {
   };
 
   const { mixer } = await buildBarn(scene);
+  buildOther(scene);
 
   window.addEventListener('resize', resize);
 
